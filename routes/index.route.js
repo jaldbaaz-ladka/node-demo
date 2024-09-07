@@ -8,23 +8,23 @@
   Copyright IBM Corporation 2020
 */
 
-const express = require('express');
-const cars = require('./cars.route');
-const accounts = require('./accounts.route');
-const swagger = require('./swagger.route');
+const express = require("express");
+const cars = require("./cars.route");
+const accounts = require("./accounts.route");
+const swagger = require("./swagger.route");
 
 const router = express.Router();
 
-router.use('/cars', cars);
-router.use('/accounts', accounts);
-router.use('/', swagger);
+router.use("/cars", cars);
+router.use("/accounts", accounts);
+router.use("/", swagger);
 
-router.get('/', (req, res) => res.send('Sample Node API Version1'));
-router.get('/health', (req, res) => {
+router.get("/", (req, res) => res.send("Koi route to bata chutiye"));
+router.get("/health", (req, res) => {
   const healthcheck = {
-		uptime: process.uptime(),
-		message: 'OK',
-		timestamp: Date.now()
+    uptime: process.uptime(),
+    message: "OK",
+    timestamp: Date.now(),
   };
   res.send(JSON.stringify(healthcheck));
 });

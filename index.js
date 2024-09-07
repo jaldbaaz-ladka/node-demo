@@ -8,20 +8,25 @@
   Copyright IBM Corporation 2020
 */
 
-const express = require('express');
-const http = require('http');
-const https = require('https');
-const cors = require('cors');
+const express = require("express");
+const http = require("http");
+const https = require("https");
+const cors = require("cors");
 
 //build config from params
-const config = require('./config');
-const {https:{ key, cert}, port, isHttps, serviceName} = config;
-const credentials = {key, cert};
+const config = require("./config");
+const {
+  https: { key, cert },
+  port,
+  isHttps,
+  serviceName,
+} = config;
+const credentials = { key, cert };
 
 //setup app & its routes
 const app = express();
 app.use(cors());
-const routes = require('./routes/index.route');
+const routes = require("./routes/index.route");
 app.use(routes);
 
 //start http server
@@ -30,10 +35,10 @@ httpServer.listen(port);
 console.log(`[${serviceName}] http server listening at port ${port}`);
 
 //start https server
-if(isHttps) {
+if (isHttps) {
   const httpsServer = https.createServer(credentials, app);
-  httpsServer.listen(port+1);
+  httpsServer.listen(port + 1);
   console.log(`[${serviceName}] https server listening at port ${port + 1}`);
 }
 
-module.exports = { app };
+module.exports = app;
